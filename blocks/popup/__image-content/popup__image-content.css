@@ -1,0 +1,9 @@
+.popup__image-content {
+    
+    padding: 0;
+    width: auto;
+    height: 80vh;
+    background: inherit;
+    text-align: center;
+    max-width: 80vw;
+}

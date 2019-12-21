@@ -1,0 +1,11 @@
+@import url(./popup__button_data/popup__button_data.css);
+@import url(./popup__button_add/popup__button_add.css);
+
+.popup__button {
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  background-color: white;
+  margin-top: 48px;
+  color: rgba(0, 0, 0, .2);
+}
