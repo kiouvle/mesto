@@ -2,7 +2,7 @@
   "name": "project11",
   "homepage": "https://kiouvle.github.io/project11/",
   "version": "1.0.0",
-  "description": "",
+  "description": "Cервис Mesto: интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.",
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production rimraf dist && webpack --mode production",
