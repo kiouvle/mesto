@@ -1,7 +1,8 @@
 import "./style.css";
 
 import Api from './blocks/api/api.js';
-import Popup from './blocks/popup/__form/popup__form.js';
+import UserInfo from './blocks/user-info/user-info.js'
+import Popup from './blocks/popup/popup.js';
 import PopupEnlarge from './blocks/popup/__image/popup__image.js';
 import CardList from './blocks/places-list/places-list.js';
 
@@ -10,7 +11,9 @@ import CardList from './blocks/places-list/places-list.js';
   const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort5' : 'https://praktikum.tk/cohort5';
 
   let cardsList = null;
+
   const popupEnlarge = new PopupEnlarge(document.querySelector('.popup__enlarge'));
+  const userInfo = new UserInfo(document.querySelector('.user-info'));
 
   const api = new Api({
     baseUrl: serverUrl,
@@ -22,7 +25,7 @@ import CardList from './blocks/places-list/places-list.js';
 
   api.getUserData()
     .then((result) => {
-      editData(result.name, result.about, result.avatar);
+      userInfo.updateData(result.name, result.about, result.avatar);
     })
     .catch((err) => console.log(err));
 
@@ -77,25 +80,10 @@ import CardList from './blocks/places-list/places-list.js';
     } else {
       errJob.setAttribute('style', 'display: none');
     }
-
   };
 
-  const userName = document.querySelector('.user-info__name');
-  const userJob = document.querySelector('.user-info__job');
-  const userAvatar = document.querySelector('.user-info__photo');
-
-  //editing user shit
-  function editData(name, job, avatar) {
-    userName.textContent = name;
-    userJob.textContent = job;
-
-    if (avatar) {
-      userAvatar.setAttribute('style', 'background-image: url(' + avatar + ')');
-    }
-  }
-
   //showing the form
-  const popupCard = new Popup(document.querySelector('.popup__card'));
+  const popupAddCard = new Popup(document.querySelector('.popup__card'));
   const addButton = document.querySelector('.user-info__button');
 
   //user cards addition
@@ -104,14 +92,14 @@ import CardList from './blocks/places-list/places-list.js';
   const placePucUrlField = addCardForm.elements.link;
 
   addButton.addEventListener('click', () => {
-    popupCard.open();
+    popupAddCard.open();
     inputCheck(placePucUrlField.value, placeNameField.value, '.popup__button_add');
   });
 
   addCardForm.addEventListener('submit', () => {
     event.preventDefault();
     cardsList.addCard(placePucUrlField.value, placeNameField.value); //add user cards
-    popupCard.close(); //popup close after adding
+    popupAddCard.close(); //popup close after adding
   });
 
   //button check for card form
@@ -124,11 +112,15 @@ import CardList from './blocks/places-list/places-list.js';
   const editButton = document.querySelector('.user-info__data-edit');
   const popupData = new Popup(document.querySelector('.popup__data'));
 
-  editButton.addEventListener('click', function (event) {
-    popupData.open();
-    nameField.value = document.querySelector('.user-info__name').textContent;
-    jobField.value = document.querySelector('.user-info__job').textContent;
+  editButton.addEventListener('click', () => {
+    const {name, job} = userInfo.getData();
+
+    nameField.value = name;
+    jobField.value = job;
+    
     inputCheck(nameField.value, jobField.value, '.popup__button_data');
+    
+    popupData.open();
   });
 
   //click the button and get ur shit  
@@ -139,7 +131,7 @@ import CardList from './blocks/places-list/places-list.js';
     api.setUserData(nameField.value, jobField.value)
       .then((result) => {
         popupData.close();
-        editData(result.name, result.about, result.avatar);
+        userInfo.updateData(result.name, result.about, result.avatar);
       })
       .catch((err) => console.log(err));
   });

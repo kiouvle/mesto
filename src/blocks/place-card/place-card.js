@@ -15,7 +15,6 @@ export default class Card {
 
   onImageClick(func) {
     this.cardImage.addEventListener('click', () => func(this._image))
-
   }
 
   create() {
