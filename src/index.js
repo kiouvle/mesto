@@ -1,6 +1,7 @@
+import "./style.css";
 (function () {
 
-
+  const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort5' : 'https://praktikum.tk/cohort5';
   //class for cards
   class Card {
     constructor(image, name) {
@@ -164,7 +165,7 @@
   }
 
   const api = new Api({
-    baseUrl: 'http://95.216.175.5/cohort5',
+    baseUrl: serverUrl,
     headers: {
       authorization: '81152569-9da1-4171-86f0-2be6511ac5c5',
       'Content-Type': 'application/json'

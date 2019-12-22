@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
+</head>
+<body>
+  <div class="root">
+    <header class="header root__section">
+      <img src="<%=require('../images/logo.svg')%>" alt="mesto logo" class="logo">
+    </header>
+    <div class="profile root__section">
+      <div class="user-info">
+        <div class="user-info__photo"></div>
+        <div class="user-info__data">
+          <h1 class="user-info__name"></h1>
+          <p class="user-info__job"></p>
+          <button class="button user-info__data-edit">Edit</button>
+        </div>
+        
+        <button class="button user-info__button">+</button>
+      </div>
+    </div>
+    <div class="places-list root__section">
+
+      <!-- Пример вёрстки карточки: -->
+<!-- 
+      <div class="place-card">
+        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
+          <button class="place-card__delete-icon"></button>
+        </div>
+        <div class="place-card__description">
+          <h3 class="place-card__name">Камчатка</h3>
+          <button class="place-card__like-icon"></button>
+        </div>
+      </div>
+-->
+      <!-- конец примера. -->
+
+    </div>
+    <div class="popup popup__card">
+      <div class="popup__content">
+        <img src="<%=require('../images/close.svg')%>" alt="" class="popup__close">
+        <h3 class="popup__title">Новое место</h3>
+        <form class="popup__form" name="new">
+            <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Название">
+            <div class="error-text error-text__place-name"></div>
+            <input type="text" name="link" class="popup__input popup__input_type_link-url" placeholder="Ссылка на картинку">
+            <div class="error-text error-text__link"></div>
+            <button type class="button popup__button popup__button_add popup__button_disabled">+</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup__data">
+      <div class="popup__content">
+        <img src="<%=require('../images/close.svg')%>" alt="" class="popup__close">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form class="popup__form" name="data">
+          <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя">
+          <div class="error-text error-text__name"></div>
+          <input type="text" name="job" class="popup__input popup__input_type_job" placeholder="О себе">
+          <div class="error-text error-text__job"></div>
+          <button type class="button popup__button popup__button_data popup__button_disabled">Сохранить</button>
+    </div>
+  </div>
+  <div class="popup popup__enlarge">
+    <div class="popup__content popup__image-content">
+      <img src="<%=require('../images/close.svg')%>" alt="" class="popup__close popup__close_image">
+      <img class="popup__image">
+    </div>
+  </div>
+  <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+</body>
+</html>
