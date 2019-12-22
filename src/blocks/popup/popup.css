@@ -7,7 +7,6 @@
 @import url(./_is-opened/popup_is-opened.css);
 @import url(./__image/popup__image.css);
 @import url(./__image-content/popup__image-content.css);
-@import url(./__enlarge/popup__enlarge.css);
 
 .popup {
   position: fixed;
