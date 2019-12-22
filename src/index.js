@@ -39,16 +39,21 @@ import CardList from './blocks/places-list/places-list.js';
 
 
   //input check for button
-  function inputCheck(first, second, buttonClass) {
+  function inputCheck(form, buttonClass) {
     const popupButton = document.querySelector(buttonClass);
 
-    if ((first.length <= 1 || first.length > 300) || (second.length <= 1 || second.length > 30)) {
-      popupButton.setAttribute('disabled', true);
-      popupButton.removeAttribute('style');
-      popupButton.setAttribute('style', 'margin-top: 33px');
+    const isFormValid = [...form.elements].reduce((acc, element) => {
+      if (element.validity.valid) {
+        return acc;
+      } else {
+        return false;
+      }
+    }, true)
+
+    if (isFormValid) {
+      popupButton.removeAttribute('aria-disabled');
     } else {
-      popupButton.removeAttribute('disabled');
-      popupButton.setAttribute('style', 'background-color: black; color: white');
+      popupButton.setAttribute('aria-disabled', true);
     }
   };
 
@@ -93,7 +98,7 @@ import CardList from './blocks/places-list/places-list.js';
 
   addButton.addEventListener('click', () => {
     popupAddCard.open();
-    inputCheck(placePucUrlField.value, placeNameField.value, '.popup__button_add');
+    inputCheck(addCardForm, '.popup__button_add');
   });
 
   addCardForm.addEventListener('submit', () => {
@@ -103,8 +108,7 @@ import CardList from './blocks/places-list/places-list.js';
   });
 
   //button check for card form
-  addCardForm.addEventListener('keyup', function () { inputCheck(placePucUrlField.value, placeNameField.value, '.popup__button_add') }); //check user input
-
+  addCardForm.addEventListener('keyup', function () { inputCheck(addCardForm, '.popup__button_add') }); //check user input
   const editPersonalInfoForm = document.forms.data;
   const jobField = editPersonalInfoForm.elements.job;
   const nameField = editPersonalInfoForm.elements.name;
@@ -113,13 +117,13 @@ import CardList from './blocks/places-list/places-list.js';
   const popupData = new Popup(document.querySelector('.popup__data'));
 
   editButton.addEventListener('click', () => {
-    const {name, job} = userInfo.getData();
+    const { name, job } = userInfo.getData();
 
     nameField.value = name;
     jobField.value = job;
-    
-    inputCheck(nameField.value, jobField.value, '.popup__button_data');
-    
+
+    inputCheck(editPersonalInfoForm, '.popup__button_data');
+
     popupData.open();
   });
 
@@ -137,7 +141,7 @@ import CardList from './blocks/places-list/places-list.js';
   });
 
   //button check for user info
-  editPersonalInfoForm.addEventListener('keyup', function () { inputCheck(nameField.value, jobField.value, '.popup__button_data') });
+  editPersonalInfoForm.addEventListener('keyup', function () { inputCheck(editPersonalInfoForm, '.popup__button_data') });
 
   //error text check for user info
   editPersonalInfoForm.addEventListener('keyup', errorText);
