@@ -1,9 +1,9 @@
 import "./style.css";
 
-import Api from '../blocks/api/api.js';
-import Popup from '../blocks/popup/__form/popup__form.js';
-import PopupEnlarge from '../blocks/popup/__image/popup__image.js';
-import CardList from '../blocks/places-list/places-list.js';
+import Api from './blocks/api/api.js';
+import Popup from './blocks/popup/__form/popup__form.js';
+import PopupEnlarge from './blocks/popup/__image/popup__image.js';
+import CardList from './blocks/places-list/places-list.js';
 
 (function () {
 
